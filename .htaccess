@@ -1,0 +1,50 @@
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+
+
+<FilesMatch "(\.htaccess|\.htpasswd)">
+  Order deny,allow
+  Deny from all
+</FilesMatch>
+
+<Files *.php>
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+<Files index.php>
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+
+<files php.ini>
+order allow,deny
+deny from all
+</files>
+
+<files config.php>
+order allow,deny
+deny from all
+</files>
+
+<files config.db.php>
+order allow,deny
+deny from all
+</files>
+
+
+<Files test.php>
+    Order Allow,Deny
+    Allow from all
+</Files>
